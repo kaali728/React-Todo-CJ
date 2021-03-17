@@ -4,9 +4,9 @@ import Board from "./components/Board";
 
 export default function App() {
   const [boards, setBoards] = useState([
-    { boardName: "Todo" },
-    { boardName: "In progress" },
-    { boardName: "Completed" }
+    { id: 0, boardName: "Todo" },
+    { id: 1, boardName: "In progress" },
+    { id: 2, boardName: "Completed" }
   ]);
   const [newBoardName, setNewBoardName] = useState("");
   const [makeNewBoard, setMakeNewBoard] = useState(false);
@@ -14,14 +14,24 @@ export default function App() {
   function showNewBoard() {
     setMakeNewBoard(!makeNewBoard);
   }
+
   function newBoard(e) {
     e.preventDefault();
     if (newBoardName.length > 0) {
-      setBoards((oldBoards) => [...oldBoards, { boardName: newBoardName }]);
+      setBoards((oldBoards) => [
+        ...oldBoards,
+        { id: boards.length, boardName: newBoardName }
+      ]);
+      setNewBoardName("");
       setMakeNewBoard(false);
     } else {
       alert("You have to Enter a Board Name");
     }
+  }
+
+  function deleteBoard(id) {
+    const editedBoard = boards.filter((board, index) => board.id !== id);
+    setBoards(editedBoard);
   }
 
   return (
@@ -47,7 +57,12 @@ export default function App() {
       ) : null}
       <div className="boardOverview">
         {boards.map((board, index) => (
-          <Board title={board.boardName} key={index} />
+          <Board
+            title={board.boardName}
+            key={index}
+            index={board.id}
+            deleteBoard={deleteBoard}
+          />
         ))}
       </div>
     </div>

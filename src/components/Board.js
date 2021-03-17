@@ -3,10 +3,12 @@ import Todo from "./Todo";
 import TodoForm from "./TodoForm";
 import { FiPlus } from "react-icons/fi";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { MdDelete } from "react-icons/md";
 
-export default function Board({ title }) {
+export default function Board({ title, deleteBoard, index }) {
   const [tasks, setTasks] = useState([]);
   const [makeNew, setMakeNew] = useState(false);
+
   function deleteTask(TaskIndex) {
     const editedTasks = tasks.filter((task, index) => index !== TaskIndex);
     setTasks(editedTasks);
@@ -27,7 +29,14 @@ export default function Board({ title }) {
 
   return (
     <div className="boardWrapper">
-      <span>{title}</span>
+      <div className="boardHead">
+        <span>{title}</span>
+        <MdDelete
+          className="removeIcon"
+          size="23"
+          onClick={() => deleteBoard(index)}
+        />
+      </div>
       <div>
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="Todos">

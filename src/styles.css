@@ -140,3 +140,9 @@
   align-content: center;
   justify-content: center;
 }
+
+.boardHead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
