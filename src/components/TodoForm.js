@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-export default function TodoForm({ setTasks, setMakeNew }) {
+export default function TodoForm({ setTasks, setMakeNew, length }) {
   const [newTask, setNewTask] = useState("");
 
   function addTodo(e) {
     e.preventDefault();
     if (newTask.length > 0) {
-      setTasks((oldTask) => [...oldTask, newTask]);
+      setTasks((oldTask) => [...oldTask, { id: length + 1, text: newTask }]);
       setMakeNew(false);
     } else {
       alert("You have to Enter Something");

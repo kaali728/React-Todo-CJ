@@ -1,2 +1,3 @@
-# React
-Created with CodeSandbox
+# My todo's
+
+Trello Todo List with Drag and Drop
