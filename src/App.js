@@ -1,7 +1,6 @@
 import "./styles.css";
 import { useState } from "react";
 import Board from "./components/Board";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 export default function App() {
   const [boards, setBoards] = useState([
@@ -24,6 +23,7 @@ export default function App() {
       alert("You have to Enter a Board Name");
     }
   }
+
   return (
     <div className="App">
       <span className="headerText">
@@ -45,22 +45,11 @@ export default function App() {
           ></input>
         </form>
       ) : null}
-      <DragDropContext>
-        <Droppable droppableId="Todos">
-          {(provided) => (
-            <div
-              className="boardOverview"
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-            >
-              {boards.map((board, index) => (
-                <Board title={board.boardName} key={index} />
-              ))}
-              <div style={{ display: "none" }}>{provided.placeholder}</div>
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <div className="boardOverview">
+        {boards.map((board, index) => (
+          <Board title={board.boardName} key={index} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -12,29 +12,55 @@ export default function Board({ title }) {
     setTasks(editedTasks);
   }
 
+  function handleOnDragEnd(result) {
+    if (!result.destination) {
+      //out side of Board
+      return;
+    }
+    //console.log(result);
+    const items = Array.from(tasks);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setTasks(items);
+  }
+
   return (
     <div className="boardWrapper">
       <span>{title}</span>
       <div>
-        {tasks.map((task, index) => (
-          <Draggable key={task.id} draggableId={String(task.id)} index={index}>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="Todos">
             {(provided) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-              >
-                <Todo
-                  task={task.text}
-                  key={index}
-                  index={index}
-                  setTasks={setTasks}
-                  deleteTask={deleteTask}
-                />
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                {tasks.map((task, index) => (
+                  <Draggable
+                    key={task.id}
+                    draggableId={String(task.id)}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <Todo
+                          task={task.text}
+                          key={index}
+                          index={index}
+                          setTasks={setTasks}
+                          deleteTask={deleteTask}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                <div style={{ display: "none" }}> {provided.placeholder}</div>
               </div>
             )}
-          </Draggable>
-        ))}
+          </Droppable>
+        </DragDropContext>
       </div>
       {makeNew ? (
         <TodoForm
