@@ -15,14 +15,21 @@ export default function TodoForm({ setTasks, setMakeNew }) {
 
   return (
     <div>
-      <form onSubmit={addTodo}>
+      <form className="formTodo" onSubmit={addTodo}>
         <input
+          className="formInput"
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
-          placeholder="enter task"
+          placeholder="your task"
         ></input>
-        <div onClick={() => setMakeNew(false)}>cancel</div>
-        <button type="submit">add</button>
+        <div style={{ display: "flex" }}>
+          <div className="formButton" onClick={() => setMakeNew(false)}>
+            Cancel
+          </div>
+          <button className="formButton" type="submit">
+            Add
+          </button>
+        </div>
       </form>
     </div>
   );

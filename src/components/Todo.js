@@ -1,10 +1,15 @@
 import React from "react";
+import { MdDelete } from "react-icons/md";
 
-export default function Todo({ task, setTasks, deleteTask, index, key }) {
+export default function Todo({ task, setTasks, deleteTask, index }) {
   return (
     <div className="todoWrapper">
-      <div>{task}</div> {/* <div>edit</div> */}
-      <div onClick={() => deleteTask(index)}>delete</div>
+      <div className="todotask">{task}</div> {/* <div>edit</div> */}
+      <MdDelete
+        className="removeIcon"
+        size="23"
+        onClick={() => deleteTask(index)}
+      />
     </div>
   );
 }

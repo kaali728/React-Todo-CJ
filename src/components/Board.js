@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Todo from "./Todo";
 import TodoForm from "./TodoForm";
+import { FiPlus } from "react-icons/fi";
 
 export default function Board({ title }) {
   const [tasks, setTasks] = useState([]);
@@ -27,7 +28,9 @@ export default function Board({ title }) {
       {makeNew ? (
         <TodoForm setTasks={setTasks} setMakeNew={setMakeNew} />
       ) : (
-        <div onClick={() => setMakeNew(true)}>new</div>
+        <div className="addIcon" onClick={() => setMakeNew(true)}>
+          <FiPlus />
+        </div>
       )}
     </div>
   );
