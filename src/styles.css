@@ -20,6 +20,22 @@
   font-size: 30px;
 }
 
+.makeNewBoard {
+  margin: 20px auto;
+  background-color: #ca5c00;
+  width: 20%;
+  color: white;
+  padding: 13px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.makeNewBoard:hover {
+  background-color: #e58943;
+  transform: scale(1.1);
+}
+
 .boardOverview {
   display: flex;
   flex-direction: row;
@@ -77,6 +93,7 @@
 }
 
 .removeIcon {
+  color: white;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
