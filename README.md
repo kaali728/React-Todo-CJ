@@ -1,2 +1,2 @@
-# React-Todo-CJ
+# React
 Created with CodeSandbox
